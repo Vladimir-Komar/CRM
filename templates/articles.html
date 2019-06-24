@@ -1,0 +1,141 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class ="row">
+    
+        <div class="col-md-10 offset-md-3">
+            <div class="col-lg-8">
+                <h3>Articles</h3>
+                <hr>
+                </div>
+        </div>
+</div>
+<div class ="row">
+    <div class="col-md-10 offset-md-3">
+        <div class="col-lg-8">
+            <form>
+                 {% csrf_token %} 
+                <input type="text" name = "keyword" class="input-sm" maxlength="64" placeholder="Some text...">
+              <button type="submit" class="btn btn-danger">Submit</button>
+            </form>
+      </div>
+    </div>
+
+</div>
+
+
+{% if articles %}
+
+{% for article in articles %}
+<div class="row">
+    <div class="col-md-10 offset-md-3">
+
+    <!-- Post Content Column -->
+    <div class="col-lg-8">
+
+
+      <!-- Title -->
+      <a href="{% url 'article:detail' article.id %}"><h2 class="mt-4">{{article.title}}</h2></a> 
+        
+      <!-- Author -->
+      <p class="lead">
+        
+        {{article.author.username}} Published by
+      </p>
+
+      <hr>
+
+      <!-- Date/Time -->
+      <p>{{article.created_date}}</p>
+      <hr>
+      <!-- Preview Image -->
+      {% if article.article_image %}
+      <a href="{% url 'article:detail' article.id %}"><img class="img-fluid rounded" src="{{article.article_image.url}}" alt=""></a>
+      {% endif %}
+     
+
+      <hr>
+
+      <!-- Post Content -->
+      <p class="lead">
+          {{article.content|safe|truncatewords:50}}
+      </p>
+<!--<hr>-->
+<!--        <a href="#" id="like"><span class="btn btn-success"></span></a> <span id="liked"> 0 </span>-->
+<!--        <a href="#" id="dislikes" style="padding-left: 25px;"><span class="btn btn-danger"></span></a> <span id="disliked"> 0 </span>-->
+<!--<hr>-->
+      <a style ="float : right;" href="{% url 'article:detail' article.id %}" class ="btn btn-danger">Read more</a>
+      <hr>
+         
+        </div>
+      </div>
+      </div>
+
+{% endfor %}
+
+
+{% else %}
+<div class ="row">
+    
+    <div class="col-md-10 offset-md-3">
+        <div class="col-lg-8">
+<div class = "alert alert-danger">
+   Articles not found
+</div>
+</div>
+</div>
+</div>
+{% endif %}
+
+{% block jquery %}
+<!--<script>-->
+
+<!--        $(document).ready(function(){-->
+<!--            $('#like').on('click', function(e){-->
+<!--                e.preventDefault()-->
+<!--                var like = 'like'-->
+<!--                var article_id = $('#article').attr('data-id')-->
+<!--                data = {-->
+<!--                    article_id: article_id,-->
+<!--                    like: like-->
+<!--                }-->
+
+<!--                $.ajax({-->
+<!--                    type: "GET",-->
+<!--                    url:-->
+<!--                    dataType: 'json',-->
+<!--                    data: data,-->
+<!--                    success: function(data){-->
+
+<!--                    }-->
+<!--                })-->
+<!--            })-->
+<!--        })-->
+
+<!--        $(document).ready(function(){-->
+<!--            $('#dislike').on('click', function(e){-->
+<!--                e.preventDefault()-->
+<!--                var dislike = 'dislike'-->
+<!--                var article_id = $('#article').attr('data-id')-->
+<!--                data = {-->
+<!--                    article_id: article_id,-->
+<!--                    dislike: dislike-->
+<!--                }-->
+
+<!--                $.ajax({-->
+<!--                    type: "GET",-->
+<!--                    url:-->
+<!--                    dataType: 'json',-->
+<!--                    data: data,-->
+<!--                    success: function(data){-->
+
+<!--                    }-->
+<!--                })-->
+<!--            })-->
+<!--        })-->
+
+<!--</script>-->
+<!--{% endblock jquery %}-->
+
+{% endblock body %}
