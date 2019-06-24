@@ -25,7 +25,11 @@ SECRET_KEY = '&49ga4rqxrp)^w=%ed&s4qf0*)1yvl!$6j=e@b^^e=i-s3g+@+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'serene-bayou-22452.herokuapp.com',
+    'localhost',
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -153,6 +157,8 @@ CKEDITOR_CONFIGS = {
 }
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
 
 #
 # # Configure Django App for Heroku.
