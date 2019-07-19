@@ -15,7 +15,7 @@
     <div class="col-md-10 offset-md-3">
         <div class="col-lg-8">
             <form>
-                 {% csrf_token %} 
+                 {% csrf_token %}
                 <input type="text" name = "keyword" class="input-sm" maxlength="64" placeholder="Some text...">
               <button type="submit" class="btn btn-danger">Submit</button>
             </form>
@@ -61,10 +61,6 @@
       <p class="lead">
           {{article.content|safe|truncatewords:50}}
       </p>
-<!--<hr>-->
-<!--        <a href="#" id="like"><span class="btn btn-success"></span></a> <span id="liked"> 0 </span>-->
-<!--        <a href="#" id="dislikes" style="padding-left: 25px;"><span class="btn btn-danger"></span></a> <span id="disliked"> 0 </span>-->
-<!--<hr>-->
       <a style ="float : right;" href="{% url 'article:detail' article.id %}" class ="btn btn-danger">Read more</a>
       <hr>
          

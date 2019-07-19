@@ -1,21 +1,23 @@
-from django.shortcuts import render,HttpResponse,redirect,get_object_or_404,reverse
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404, reverse
 from .forms import ArticleForm
-from .models import Article,Comment
+from .models import Article, Comment
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+
+
 # Create your views here.
 
 
-@login_required(login_url = "user:login")
+@login_required(login_url="user:login")
 def articles(request):
     keyword = request.GET.get("keyword")
 
     if keyword:
         articles = Article.objects.filter(title__contains=keyword)
-        return render(request,"articles.html", {"articles": articles})
+        return render(request, "articles.html", {"articles": articles})
     articles = Article.objects.all()
 
-    return render(request, "articles.html",{"articles":articles})
+    return render(request, "articles.html", {"articles": articles})
 
 
 def index(request):
@@ -41,17 +43,17 @@ def addArticle(request):
 
     if form.is_valid():
         article = form.save(commit=False)
-        
+
         article.author = request.user
         article.save()
 
         messages.success(request, "Article created successfully")
         return redirect("article:dashboard")
-    return render(request,"addarticle.html",{"form": form})
+    return render(request, "addarticle.html", {"form": form})
 
 
-def detail(request,id):
-    #article = Article.objects.filter(id = id).first()   
+def detail(request, id):
+    # article = Article.objects.filter(id = id).first()
     article = get_object_or_404(Article, id=id)
 
     comments = article.comments.all()
@@ -60,12 +62,11 @@ def detail(request,id):
 
 @login_required(login_url="user:login")
 def updateArticle(request, id):
-
     article = get_object_or_404(Article, id=id)
-    form = ArticleForm(request.POST or None,request.FILES or None, instance=article)
+    form = ArticleForm(request.POST or None, request.FILES or None, instance=article)
     if form.is_valid():
         article = form.save(commit=False)
-        
+
         article.author = request.user
         article.save()
 
@@ -87,7 +88,7 @@ def deleteArticle(request, id):
 
 
 def addComment(request, id):
-    article = get_object_or_404(Article,id = id)
+    article = get_object_or_404(Article, id=id)
 
     if request.method == "POST":
         comment_author = request.POST.get("comment_author")
@@ -99,18 +100,3 @@ def addComment(request, id):
 
         newComment.save()
     return redirect(reverse("article:detail", kwargs={"id": id}))
-
-
-# class UserReactionView(View):
-#     template_name = 'articles.html'
-#
-#     def get(self, request, *args, **kwargs):
-#         article_id = self.request.GET.get('article_id')
-#         article = Article.objects.get(id=article_id)
-#         like = self.request.GET.get('like')
-#         dislike = self.request.GET.get('dislike')
-#         print(article_id)
-#         print(article)
-#         print(like)
-#         print(dislike)
-#         return JsonResponse({'ok': 'ok'})

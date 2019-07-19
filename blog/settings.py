@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     "ckeditor",
     'django_cleanup',
+    'crm',
 
     
 ]

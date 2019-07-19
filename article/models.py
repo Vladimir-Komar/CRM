@@ -9,8 +9,6 @@ class Article(models.Model):
     content = RichTextField()
     created_date = models.DateTimeField(auto_now_add=True, verbose_name="Creation Date")
     article_image = models.FileField(blank=True, null=True, verbose_name="Add Photo to Article")
-    likes = models.PositiveIntegerField(default=0)
-    dislikes = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.title
