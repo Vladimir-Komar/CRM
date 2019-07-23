@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+{% load crispy_forms_tags %}
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h3>Добавить поставщика</h3>
+        <hr>
+        <form method = "post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.media}}
+            {{form|crispy}}
+            <button type = "submit" class = "btn btn-danger">Сохранить</button>
+
+        </form>
+    </div>
+  </div>
+{% if provider.count > 0 %}
+
+    <table class="table table-striped" style="margin-top: 50px;">
+
+        <tr><th>Бренд</th><th>Фото</th>
+
+            {% for person in provider %}
+        <tr>
+            <td>{{ person.name }}</td>
+            <td>
+                {% if person.article_image %}
+                    <img style="width: 100px;" class="img-fluid rounded" src="{{person.article_image.url}}" alt="">
+                {% endif %}
+            </td>
+        </tr>
+
+
+
+        {% endfor %}
+    </table>
+    {% endif %}
+{% endblock body %}
+
+

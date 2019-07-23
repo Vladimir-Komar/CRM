@@ -12,29 +12,38 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{% url 'article:articles'  %}">Articles</a>
             </li>
-             <li class="nav-item active">
-                <a class="nav-link" href="{% url 'crm:board'  %}">CRM</a>
-            </li>
-            
+            <li class="nav-item active">
+            <a class="nav-link" href="{% url 'article:dashboard'  %}">Control Board</a>
+          </li>
+
+
           </ul>
 
           <ul class="navbar-nav ml-auto">
           {% if request.user.is_authenticated %}
+
+             <li class="nav-item active">
+                <a class="nav-link" href="{% url 'crm:customer'  %}">Клиенты</a>
+            </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'crm:provider'  %}">Поставщик</a>
+            </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'crm:product'  %}">Лекарства</a>
+            </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'crm:deal'  %}">Сделка</a>
+            </li>
+
           <li class="nav-item active">
-            <a class="nav-link" href="{% url 'article:dashboard'  %}">Control Board</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'user:logout'  %}">Log out</a>
+            <a class="nav-link" href="{% url 'user:logout'  %}">Выход</a>
           </li>
           {% else %}
 
           <li class="nav-item active">
-            <a class="nav-link" href="{% url 'user:login'  %}">Sing in</a>
+            <a class="nav-link" href="{% url 'user:login'  %}">Войти</a>
           </li>
           {% endif %}
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'user:register'  %}">Register</a>
-          </li>
           
           </ul>
         </div>

@@ -5,6 +5,9 @@ from . import views
 app_name = "crm"
 
 urlpatterns = [
-    # url(r'^$', views.index, name='index'),
-    url(r'^$', views.board, name='board'),
+    # url(r'^$', views.customer, name='customer'),
+    url('customer', views.customer, name='customer'),
+    url('providers/', views.provider, name='provider'),
+    url('product/', views.product, name='product'),
+    url('deal/', views.deal, name='deal'),
 ]

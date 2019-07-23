@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+{% load crispy_forms_tags %}
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h3>Добавить клиента</h3>
+        <hr>
+        <form method = "post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.media}}
+            {{form|crispy}}
+            <button type = "submit" class = "btn btn-danger">Сохранить</button>
+
+        </form>
+    </div>
+  </div>
+{% if customer.count > 0 %}
+
+    <table class="table table-striped" style="margin-top: 50px;">
+
+        <tr><th>ID</th><th>Фамилия</th><th>Имя</th><th>Телефон</th><th>Адрес</th><th>Е-mail</th> <th>Фото</th>
+
+            {% for person in customer %}
+        <tr> <td>{{ person.id }}</td>
+            <td>{{ person.first_name }}</td>
+            <td>{{ person.last_name }}</td>
+            <td>{{ person.phone_number }}</td>
+            <td>{{ person.address }}</td>
+            <td>{{ person.email }}</td>
+            <td>
+                {% if person.customer_image %}
+                    <img style="width: 30px;" onmouseover="this.style.width='200px';" onmouseout="this.style.width='30px';"class="img-fluid rounded" src="{{person.customer_image.url}}" alt="">
+                {% endif %}
+            </td>
+        </tr>
+
+
+
+        {% endfor %}
+    </table>
+    {% endif %}
+{% endblock body %}
+
+
