@@ -17,7 +17,7 @@
         </form>
     </div>
   </div>
-{% if customer.count > 0 %}
+
 
     <table class="table table-striped" style="margin-top: 50px;">
 
@@ -37,11 +37,24 @@
             </td>
         </tr>
 
-
-
         {% endfor %}
     </table>
-    {% endif %}
+<div class="pagination">
+    <span class="step-links">
+        {% if customer.has_previous %}
+            <a href="?page={{ customer.previous_page_number }}"> << Предыдущая</a>
+        {% endif %}
+
+        <span class="current">
+            Страница {{ customer.number }} из {{ customer.paginator.num_pages }}
+        </span>
+
+        {% if customer.has_next %}
+            <a href="?page={{ customer.next_page_number }}">Следующая >></a>
+        {% endif %}
+    </span>
+</div>
+
 {% endblock body %}
 
 

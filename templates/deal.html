@@ -17,20 +17,36 @@
     </div>
   </div>
 
-{% if deal.count > 0 %}
-    <table class="table table-striped" style="margin-top: 50px;">
 
-        <tr><th>Дата</th><th>Клиент</th><th>Продукт</th><th>Цена продажи</th><th>Профит</th></tr>
+<table class="table table-striped" style="margin-top: 50px;">
 
-            {% for person in deal %}
-        <tr> <td>{{ person.deal_date }}</td>
+    <tr><th>Дата</th><th>Клиент</th><th>Продукт</th><th>Цена продажи</th><th>Профит</th></tr>
+
+{% for person in deal %}
+    <tr> <td>{{ person.deal_date }}</td>
             <td>{{ person.customer }}</td>
             <td>{{ person.product }}</td>
             <td>{{ person.deal_price }}</td>
             <td>{{ person.profit }}</td>
         </tr>
+{% endfor %}
 
-        {% endfor %}
-    </table>
-    {% endif %}
+</table>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if deal.has_previous %}
+            <a href="?page={{ deal.previous_page_number }}"> << Предыдущая</a>
+        {% endif %}
+
+        <span class="current">
+            Страница {{ deal.number }} из {{ deal.paginator.num_pages }}
+        </span>
+
+        {% if deal.has_next %}
+            <a href="?page={{ deal.next_page_number }}">Следующая >></a>
+        {% endif %}
+    </span>
+</div>
+
 {% endblock body %}
