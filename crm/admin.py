@@ -8,16 +8,16 @@ admin.site.register(Product)
 # admin.site.register(Deal)
 
 
-# @admin.register(Deal)
-# class DealAdmin(admin.ModelAdmin):
-#
-#     list_display = ["customer","product","deal_price"]
-#
-#     list_display_links = ["customer","deal_date"]
-#
-#     search_fields = ["customer"]
-#
-#     list_filter = ["deal_date"]
-#
-#     class Meta:
-#         model = Deal
+@admin.register(Deal)
+class DealAdmin(admin.ModelAdmin):
+
+    list_display = ["deal_date", "customer","product","deal_price", "profit"]
+
+    list_display_links = ["customer","deal_date"]
+
+    search_fields = ["deal_date"]
+
+    list_filter = ["deal_date"]
+
+    class Meta:
+        model = Deal

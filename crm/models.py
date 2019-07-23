@@ -46,5 +46,8 @@ class Deal(models.Model):
     def __str__(self):
         return '{}, {}, {}'.format(self.deal_date, self.customer, self.product)
 
+    class Meta:
+        ordering = ['-deal_date']
+
 
 
