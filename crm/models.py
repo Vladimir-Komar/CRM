@@ -40,6 +40,7 @@ class Deal(models.Model):
     deal_date = models.DateField()
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name="Customer", related_name="deal")
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Product", related_name="deal")
+    quantity = models.PositiveIntegerField(default=1)
     deal_price = models.DecimalField(max_digits=6, decimal_places=2)
     profit = models.DecimalField(max_digits=6, null=True, decimal_places=2)
 

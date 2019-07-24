@@ -63,11 +63,13 @@ def deal(request):
         deal_date = form.cleaned_data['deal_date']
         customer = form.cleaned_data['customer']
         product = form.cleaned_data['product']
+        quantity = form.cleaned_data['quantity']
         deal_price = form.cleaned_data['deal_price']
         full = form.cleaned_data['product']
         price = full.price
-        total = deal_price - price
-        b = Deal(deal_date=deal_date, customer=customer, product=product, deal_price=deal_price, profit=total)
+        total = (deal_price - price) * quantity
+        b = Deal(deal_date=deal_date, customer=customer, product=product, quantity=quantity,
+                 deal_price=deal_price, profit=total)
         b.save()
 
         messages.success(request, "Сделка сохранена!!!")

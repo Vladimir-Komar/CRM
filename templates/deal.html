@@ -20,12 +20,14 @@
 
 <table class="table table-striped" style="margin-top: 50px;">
 
-    <tr><th>Дата</th><th>Клиент</th><th>Продукт</th><th>Цена продажи</th><th>Профит</th></tr>
+    <tr><th>Дата</th><th>Клиент</th><th>Продукт</th><th>К-во</th><th>Цена продажи</th><th>Профит</th></tr>
 
 {% for person in deal %}
-    <tr> <td>{{ person.deal_date }}</td>
+        <tr>
+            <td>{{ person.deal_date }}</td>
             <td>{{ person.customer }}</td>
             <td>{{ person.product }}</td>
+            <td>{{ person.quantity }}</td>
             <td>{{ person.deal_price }}</td>
             <td>{{ person.profit }}</td>
         </tr>
